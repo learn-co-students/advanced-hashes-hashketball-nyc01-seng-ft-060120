@@ -1,7 +1,9 @@
 # Write your code below game_hash
+require "pry"
+
 def game_hash
   {
-    home: {
+  home: {
       team_name: "Brooklyn Nets",
       colors: ["Black", "White"],
       players: [
@@ -62,7 +64,7 @@ def game_hash
         }
       ]
     },
-    away: {
+  away: {
       team_name: "Charlotte Hornets",
       colors: ["Turquoise", "Purple"],
       players: [
@@ -127,3 +129,101 @@ def game_hash
 end
 
 # Write code here
+#--------------- HELPER METHODS -------------------#
+def gather_players
+array =[]
+  array << game_hash[:home][:players] 
+    array << game_hash[:away][:players] 
+      array.flatten
+        end
+
+def gather_teams
+array = []
+  array << game_hash[:home][:team_name]
+    array << game_hash[:away][:team_name]
+      array
+        end
+
+def gather_numbers(var)
+array= []
+  i = 0
+    while i < game_hash[var][:players].length
+      array <<  game_hash[var][:players][i][:number]
+      
+      i += 1
+    end
+  array.sort
+end
+
+def gather_shoe_size
+i = 0
+shoes = []
+
+while i < gather_players.length
+  shoes << gather_players[i][:shoe] 
+    i += 1  
+  end
+shoes.max()
+end
+
+# ------------------------------------------------#
+
+def num_points_scored(baller)
+i = 0
+while i < gather_players.length do
+  if baller == gather_players[i][:player_name]
+    return gather_players[i][:points]
+      end
+        i += 1
+          end
+            end
+
+def shoe_size(baller)
+  i = 0
+    while i < gather_players.length do
+      if baller == gather_players[i][:player_name]
+        return gather_players[i][:shoe]
+          end
+            i += 1
+              end
+                end
+                
+def team_colors(team_name)
+  game_hash.each do |key, value|
+    if team_name == value[:team_name]
+      return value[:colors] 
+        end
+          end
+            end
+            
+def team_names
+  gather_teams
+    end
+    
+def player_numbers(team)
+  game_hash.each do |key, value|
+    if team == game_hash[key][:team_name]
+      return gather_numbers(key)
+    end  
+  end    
+end
+
+def player_stats(player_name)
+i = 0
+while i < gather_players.length do
+  if player_name == gather_players[i][:player_name]
+    return gather_players[i]
+      end
+    i += 1
+  end
+end
+
+def big_shoe_rebounds
+i = 0
+  while i < gather_players.length
+    if gather_players[i][:shoe] == gather_shoe_size
+      return gather_players[i][:rebounds]
+      end
+    i += 1
+  end
+end
