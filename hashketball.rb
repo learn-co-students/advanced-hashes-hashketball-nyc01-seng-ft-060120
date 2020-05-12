@@ -127,3 +127,96 @@ def game_hash
 end
 
 # Write code here
+
+def who?(hash, player)
+  #finds and returns the hash of the requested player
+  hash.each {|team, stats|
+    hash[team][:players].each {|person|
+      if person[:player_name] == player
+        #p person[:points]
+        return person
+      end
+    }
+  }
+end
+
+def team?(hash, team)
+  #returns the hash of the team requested
+  if hash[:home][:team_name] == team
+    return hash[:home]
+  else
+    return hash[:away]
+  end
+end
+
+def num_points_scored(player)
+  hash = game_hash
+  person = who?(hash, player)
+  person[:points]
+end
+
+def shoe_size(player)
+  hash = game_hash
+  person = who?(hash, player)
+  person[:shoe]
+end
+
+def team_colors(team)
+  hash = game_hash
+  the_team = team?(hash, team)
+  the_team[:colors]
+end
+
+def team_names
+  hash = game_hash
+  teams = [hash[:home][:team_name], hash[:away][:team_name]]
+end
+
+def player_numbers(team)
+  hash = game_hash
+  the_team = team?(hash, team)
+  numbers = []
+  the_team[:players].each {|person|
+    numbers << person[:number]
+  }
+  numbers
+end
+
+def player_stats(player)
+  hash = game_hash
+  person = who?(hash, player)
+  new_person = {}
+  person.each {|stat|
+    if stat != :player_name
+      new_person[stat] = person[stat]
+    end
+  }
+end
+
+def gib_array(team)
+  biggest_shoe_array = [0, 0]
+  team[:players].each {|person|
+    if person[:shoe] > biggest_shoe_array[0]
+      biggest_shoe_array = [person[:shoe], person[:rebounds]]
+    end
+  }
+  return biggest_shoe_array
+end
+
+def big_shoe_rebounds
+  #arrays that will contain player names shoe sizes and rebounds
+  biggest_shoe_home = []
+  biggest_shoe_away = []
+  hash = game_hash
+  #separate hashes for each team
+  home = team?(hash, "Brooklyn Nets")
+  away = team?(hash, "Charlotte Hornets")
+  #use helper method defined above
+  biggest_shoe_home = gib_array(home)
+  biggest_shoe_away = gib_array(away)
+  if biggest_shoe_home[0] > biggest_shoe_away[0]
+    return biggest_shoe_home[1]
+  else
+    return biggest_shoe_away[1]
+  end
+end
