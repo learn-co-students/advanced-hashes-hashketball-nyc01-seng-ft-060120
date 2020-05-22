@@ -1,3 +1,19 @@
+
+
+# Hashketball
+# 052120
+# Corey Lynch
+
+
+#------------------------------------------------------------------------
+
+
+require 'pry'
+
+
+#------------------------------------------------------------------------
+
+
 # Write your code below game_hash
 def game_hash
   {
@@ -126,4 +142,190 @@ def game_hash
   }
 end
 
-# Write code here
+
+#------------------------------------------------------------------------
+
+
+def num_points_scored(player)
+  points    = nil
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:player_name] == player
+      points = game_hash[:home][:players][counter][:points]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < home_team do
+    if game_hash[:away][:players][counter][:player_name] == player
+      points = game_hash[:away][:players][counter][:points]
+    end
+    counter += 1
+  end
+  points
+end
+
+
+#------------------------------------------------------------------------
+
+
+def shoe_size(player)
+  size    = nil
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:player_name] == player
+      size = game_hash[:home][:players][counter][:shoe]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < home_team do
+    if game_hash[:away][:players][counter][:player_name] == player
+      size = game_hash[:away][:players][counter][:shoe]
+    end
+    counter += 1
+  end
+  size
+end
+
+
+#------------------------------------------------------------------------
+
+
+def team_colors(team)
+  colors    = []
+  counter   = 0
+  home_team = game_hash[:home][:colors].length
+  away_team = game_hash[:away][:colors].length
+
+  while counter < home_team do
+    if game_hash[:home][:team_name] == team
+      colors.push(game_hash[:home][:colors][counter])
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < away_team do
+    if game_hash[:away][:team_name] == team
+      colors.push(game_hash[:away][:colors][counter])
+    end
+    counter += 1
+  end
+  colors
+end
+
+
+#------------------------------------------------------------------------
+
+
+def team_names()
+  names = []
+
+  names.push(game_hash[:home][:team_name])
+
+  names.push(game_hash[:away][:team_name])
+
+  names
+end
+
+
+#------------------------------------------------------------------------
+
+
+def player_numbers(team)
+  jersey_numbers = []
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:team_name] == team
+      jersey_numbers.push(game_hash[:home][:players][counter][:number])
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < away_team do
+    if game_hash[:away][:team_name] == team
+      jersey_numbers.push(game_hash[:away][:players][counter][:number])
+    end
+    counter += 1
+  end
+  jersey_numbers = jersey_numbers.sort
+end
+
+
+#------------------------------------------------------------------------
+
+
+def player_stats(player)
+  stats = nil
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:player_name] == player
+      stats = game_hash[:home][:players][counter]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < home_team do
+    if game_hash[:away][:players][counter][:player_name] == player
+      stats = game_hash[:away][:players][counter]
+    end
+    counter += 1
+  end
+  stats
+end
+
+
+#------------------------------------------------------------------------
+
+
+def big_shoe_rebounds()
+  shoe_measure  = 0
+  big_rebound = 0
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:shoe] > shoe_measure
+      shoe_measure = game_hash[:home][:players][counter][:shoe]
+      big_rebound = game_hash[:home][:players][counter][:rebounds]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < away_team do
+    if game_hash[:away][:players][counter][:shoe] > shoe_measure
+      shoe_measure = game_hash[:away][:players][counter][:shoe]
+      big_rebound = game_hash[:away][:players][counter][:rebounds]
+    end
+    counter += 1
+  end
+  big_rebound
+end
+
+
+#------------------------------------------------------------------------
