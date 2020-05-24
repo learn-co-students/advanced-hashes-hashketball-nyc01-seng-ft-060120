@@ -329,3 +329,97 @@ end
 
 
 #------------------------------------------------------------------------
+
+
+# Which player has the most points? Call the method most_points_scored.
+
+def most_points_scored()
+  points_scored  = 0
+  mvp = nil
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:points] > points_scored
+      points_scored = game_hash[:home][:players][counter][:points]
+      mvp = game_hash[:home][:players][counter][:player_name]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < away_team do
+    if game_hash[:away][:players][counter][:points] > points_scored
+      points_scored = game_hash[:away][:players][counter][:points]
+      mvp = game_hash[:away][:players][counter][:player_name]
+    end
+    counter += 1
+  end
+  mvp
+  # binding.pry
+end
+
+# most_points_scored
+
+
+
+
+
+#------------------------------------------------------------------------
+
+
+# Which team has the most points? Call the method winning_team.
+
+def winning_team()
+  home_score  = 0
+  away_score = 0
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:points] > 0
+      home_score = home_score + game_hash[:home][:players][counter][:points]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < away_team do
+    if game_hash[:away][:players][counter][:points] > 0
+      away_score = away_score + game_hash[:away][:players][counter][:points]
+    end
+    counter += 1
+  end
+
+  if home_score > away_score
+     game_hash[:home][:team_name]
+  else game_hash[:away][:team_name]
+
+  end
+end
+
+winning_team()
+
+
+#------------------------------------------------------------------------
+
+
+# Which player has the longest name? Call the method player_with_longest_name.
+
+
+#------------------------------------------------------------------------
+
+
+# Write a method that returns true if the player with the longest name had the most steals. Call the method long_name_steals_a_ton?.
+
+
+
+
+
+
+
+#------------------------------------------------------------------------
