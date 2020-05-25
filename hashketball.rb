@@ -364,9 +364,6 @@ end
 # most_points_scored
 
 
-
-
-
 #------------------------------------------------------------------------
 
 
@@ -400,9 +397,10 @@ def winning_team()
   else game_hash[:away][:team_name]
 
   end
+  # binding.pry
 end
 
-winning_team()
+# winning_team()
 
 
 #------------------------------------------------------------------------
@@ -410,11 +408,91 @@ winning_team()
 
 # Which player has the longest name? Call the method player_with_longest_name.
 
+def player_with_longest_name()
+  long_name  = 0
+  player_with_name = nil
+  counter   = 0
+  home_team = game_hash[:home][:players].length
+  away_team = game_hash[:away][:players].length
+
+  while counter < home_team do
+    if game_hash[:home][:players][counter][:player_name].length > long_name
+      long_name = game_hash[:home][:players][counter][:player_name].length
+      player_with_name = game_hash[:home][:players][counter][:player_name]
+    end
+    counter += 1
+  end
+
+  counter = 0
+
+  while counter < away_team do
+    if game_hash[:away][:players][counter][:player_name].length > long_name
+      long_name = game_hash[:away][:players][counter][:player_name].length
+      player_with_name = game_hash[:away][:players][counter][:player_name]
+    end
+    counter += 1
+  end
+  player_with_name
+end
+
 
 #------------------------------------------------------------------------
 
 
 # Write a method that returns true if the player with the longest name had the most steals. Call the method long_name_steals_a_ton?.
+
+
+
+#------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
