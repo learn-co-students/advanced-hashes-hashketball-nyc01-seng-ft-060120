@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +127,87 @@ def game_hash
   }
 end
 
+# require './hashketball.rb' -- in IRB 
 # Write code here
+def num_points_scored(player)
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |name| 
+      if name[:player_name] == player
+     return name[:points]
+    end 
+   end 
+  end 
+end 
+
+def shoe_size(player)
+   game_hash.each do |team, team_info|
+    team_info[:players].each do |name| 
+      if name[:player_name] == player
+      return name[:shoe]
+    end
+   end 
+  end 
+end 
+
+def team_colors(team_name)
+  if game_hash[:home][:team_name] == team_name
+    return game_hash[:home][:colors]
+  elsif game_hash[:away][:team_name] == team_name
+    return game_hash[:away][:colors]
+  end 
+end 
+
+def team_names
+  teams = []
+  teams.push(
+    game_hash[:home][:team_name], 
+    game_hash[:away][:team_name]
+  )
+  p teams 
+end 
+
+def player_numbers(team_name)
+    jersey_numbers = []
+    game_hash.each do |team, team_info|
+      if team_info[:team_name] == team_name
+        team_info.each do |key, value|
+          if key == :players
+            value.each do |jersey|
+          jersey_numbers.push(jersey[:number])
+            end 
+          end 
+        end 
+      end
+    end 
+  return jersey_numbers
+end 
+
+def player_stats(name)
+  game_hash.each do |team, team_info|
+    team_info.each do |key, value|
+      if key == :players 
+        value.each do |stats|
+          if name == stats[:player_name]
+          return stats
+          end 
+        end 
+      end 
+    end 
+  end
+end 
+
+def big_shoe_rebounds
+  big_shoe = 0 
+  rebound = 0 
+  game_hash.each do |team, team_info| 
+    team_info[:players].each do |info|
+      while big_shoe < info[:shoe] do
+        big_shoe = info[:shoe] 
+        rebound = info[:rebounds]
+      end
+    end 
+  end 
+  return rebound
+end   
+
+  
