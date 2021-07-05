@@ -127,3 +127,97 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+
+home_player = 0
+  game_hash[:home][:players].each do |player_stats|
+    if player_name == player_stats[:player_name]
+      home_player = player_stats[:points]
+    end
+  end
+
+  away_player = 0
+  game_hash[:away][:players].each do |player_stats|
+    if player_name == player_stats[:player_name]
+      away_player = player_stats[:points]
+    end
+  end
+  return home_player + away_player
+end
+
+def shoe_size(player_name)
+  home_shoe_size = 0
+  game_hash[:home][:players].each do |player_stats|
+    if player_name == player_stats[:player_name]
+      home_shoe_size = player_stats[:shoe]
+    end
+  end
+
+  away_shoe_size = 0
+  game_hash[:away][:players].each do |player_stats|
+    if player_name == player_stats[:player_name]
+      away_shoe_size = player_stats[:shoe]
+    end
+  end
+
+  return home_shoe_size + away_shoe_size
+end
+
+def team_colors(team_name)
+
+game_hash.each do |team, team_data|
+  if team_data[:team_name] == team_name
+    return team_data[:colors]
+  end
+end
+end
+
+def team_names
+  game_hash.collect do |team_data, team|
+    team[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  home_jersey_number = Array.new
+  away_jersey_number = Array.new
+
+  if game_hash[:home][:team_name] == team_name
+    game_hash[:home][:players].each do |numbers|
+      home_jersey_number << numbers[:number]
+    end
+  return home_jersey_number
+else
+  game_hash[:away][:players].each do |numbers|
+    away_jersey_number << numbers[:number]
+  end
+return away_jersey_number
+end
+end
+
+def player_stats(player_name)
+  game_hash[:home][:players].each do |player|
+    if player [:player_name] == player_name
+      return player
+    end
+  end
+game_hash[:away][:players].each do |player|
+  if player [:player_name] == player_name
+    return player
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe_size = 0
+  num_rebounds = 0
+  game_hash.each do |team_data, team|
+  team [:players].each do |player, stats|
+    if player[:shoe] > shoe_size
+    shoe_size = player[:shoe]
+    num_rebounds = player[:rebounds]
+  end
+end
+end
+num_rebounds
+end
