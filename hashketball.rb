@@ -1,3 +1,5 @@
+require 'pry'
+
 # Write your code below game_hash
 def game_hash
   {
@@ -126,4 +128,84 @@ def game_hash
   }
 end
 
-# Write code here
+#knows the number of points scored by each player
+def num_points_scored(player_lookup)               
+  game_hash.each do |location, team_data|
+#return the number of points scored for that player
+  team_data[:players].each do |player|
+    if player[:player_name] == player_lookup
+      return player[:points]
+      end
+    end
+  end
+end
+
+def shoe_size(player_lookup)               
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+    if player[:player_name] == player_lookup
+      return player[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors(team_lookup)               
+# game_hash.each do |location, team_data|
+ # location.each do |team_data|
+  #  if team_data[:team_name] == team_lookup
+ #   return team_data[:colors]
+  if game_hash[:home][:team_name] == team_lookup
+    return game_hash[:home][:colors]
+   else return game_hash[:away][:colors]
+  end
+end
+
+def team_names            
+  game_hash.map do |location, team_data|
+    team_data[:team_name]
+  end
+end
+
+def player_numbers(team_name_lookup)
+player_numbers_array = []
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name_lookup
+      team_data[:players].each do |player|
+        player_numbers_array.push(player[:number])
+      end
+    end
+  end
+  return player_numbers_array
+end
+
+def player_stats(player_lookup)
+stats = {}
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_lookup
+        stats = player
+      end
+    end
+  end
+  return stats
+end
+
+def big_shoe_rebounds
+  #return number of rebounds assoc w/ the player w/ lrgst shoe size
+  #First, find the player with the largest shoe size: Mason Plumlee
+  #return that player's number of rebounds: 11
+  #Remember to think about return values here
+biggest_shoe = 0 
+rebounds = 0
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:shoe] > biggest_shoe
+        biggest_shoe = player[:shoe]
+        rebounds = player[:rebounds]
+      end
+    end
+  end
+  return rebounds
+end  
+   
