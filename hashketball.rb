@@ -1,3 +1,5 @@
+require "pry"
+
 # Write your code below game_hash
 def game_hash
   {
@@ -125,5 +127,81 @@ def game_hash
     }
   }
 end
+  
 
 # Write code here
+
+def num_points_scored(player_name)
+  game_hash.each do |location_key_sym, team_hash_value|
+    team_hash_value[:players].each do |player_hash_value|
+      if player_hash_value[:player_name] == player_name
+        return player_hash_value[:points]
+      end
+    end
+  end
+end
+
+
+def shoe_size(player_name)
+  game_hash.each do |location_key_sym, team_hash_value|
+    team_hash_value[:players].each do |player_hash_value|
+      if player_hash_value[:player_name] == player_name
+        return player_hash_value[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |location_key_sym, team_hash_value|
+    if team_hash_value[:team_name] == team_name
+        return team_hash_value[:colors]
+    end
+  end
+end
+
+def team_names
+  new_array = []
+  game_hash.each do |location_key_sym, team_hash_value|
+    new_array << team_hash_value[:team_name]
+  end
+  new_array
+end
+
+
+def  player_numbers(team_name)
+  new_array = []
+    game_hash.each do |location_key_sym, team_hash_value|
+      if team_hash_value[:team_name] == team_name
+        team_hash_value[:players].each do |player_data_hash_val|
+          new_array << player_data_hash_val[:number]
+        end
+      end
+    end
+  new_array
+end
+
+def player_stats(player_name)
+  game_hash.each do |location_key_sym, team_hash_value|
+    team_hash_value[:players].each do |player_data_hash_val|
+      if player_data_hash_val[:player_name] == player_name
+        return player_data_hash_val
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe_size = 0
+  number_of_rebounds = 0
+  game_hash.each do |location_key_sym, team_hash_value|
+    team_hash_value[:players].each do |player_data_hash_val|
+      if player_data_hash_val[:shoe] > shoe_size
+        shoe_size = player_data_hash_val[:shoe]
+        number_of_rebounds = player_data_hash_val[:rebounds]
+      end
+    end
+  end
+  number_of_rebounds
+end
+
