@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,105 @@ def game_hash
   }
 end
 
-# Write code here
+
+def num_points_scored(player)
+    i = 0
+    while i < game_hash[:home][:players].length do
+      if game_hash[:home][:players][i][:player_name] == player
+        return game_hash[:home][:players][i][:points]
+      end
+      i += 1
+    end
+    i = 0
+    while i < game_hash[:away][:players].length do
+      if game_hash[:away][:players][i][:player_name] == player
+        return game_hash[:away][:players][i][:points]
+      end
+      i += 1
+    end
+end  
+
+
+def shoe_size(player)
+  answer = nil
+  game_hash.each do |val0, val1, val2, val3|
+    player_stats = game_hash[val0][:players]
+    i = 0 
+    while i < player_stats.length do
+      if player_stats[i][:player_name] == player
+        answer = player_stats[i][:shoe]
+      end
+      i += 1
+    end
+  end
+  answer
+end
+
+def team_colors(team)
+  answer = nil
+  game_hash.each do |val0, val1, val2, val3|
+    if game_hash[val0][:team_name] == team
+      answer = game_hash[val0][:colors]
+    end
+  end
+  answer
+end
+    
+def team_names
+  teams = []
+  game_hash.each do |val0, val1, val2, val3|
+    teams << game_hash[val0][:team_name]
+  end
+  teams
+end
+
+def player_numbers(team)
+  numbers = []
+  game_hash.each do |val0, val1, val2, val3|
+    if game_hash[val0][:team_name] == team
+      i = 0
+      while i < game_hash[val0][:players].length do
+        numbers << game_hash[val0][:players][i][:number]
+        i += 1
+      end
+    end
+  end
+  numbers
+end
+        
+def player_stats(player)
+  stats = nil
+  game_hash.each do |val0, val1, val2, val3|
+    i = 0 
+    while i < game_hash[val0][:players].length do
+      if game_hash[val0][:players][i][:player_name] == player
+        stats = game_hash[val0][:players][i]
+      end
+      i += 1
+    end
+  end
+  stats
+end
+
+def big_shoe_rebounds
+  shoe = 0
+  index = 0
+  rebounds = 0
+  
+  game_hash.each do |val0, val1, val2, val3|
+    i = 0 
+    while i < game_hash[val0][:players].length do
+      if game_hash[val0][:players][i][:shoe] > shoe
+        shoe = game_hash[val0][:players][i][:shoe]
+        rebounds = game_hash[val0][:players][i][:rebounds]
+      end
+      i += 1
+    end
+  end
+  rebounds
+end
+    
+
+
+
+
