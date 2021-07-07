@@ -127,3 +127,90 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  game_hash[:home][:players].each do |player|
+    if player[:player_name] === player_name
+      return player[:points]
+    end
+  end
+  
+  game_hash[:away][:players].each do |player|
+    if player[:player_name] === player_name
+      return player[:points]
+    end
+  end
+end
+
+
+def shoe_size(player_name)
+  game_hash[:home][:players].each do |player|
+    if player[:player_name] === player_name
+      return player[:shoe]
+    end
+  end
+  
+  game_hash[:away][:players].each do |player|
+    if player[:player_name] === player_name
+      return player[:shoe]
+    end
+  end
+end
+
+def team_colors(team_name) 
+  if game_hash[:home][:team_name] === team_name
+    return game_hash[:home][:colors]
+  else if game_hash[:away][:team_name] === team_name
+    return game_hash[:away][:colors]
+  end
+end
+end
+
+
+def team_names
+  teams = []
+  game_hash.each_pair do |team, stats|
+     teams << stats[:team_name]
+  end
+  teams
+end
+
+def player_numbers(team_name)
+    nums = []
+  game_hash.each_pair do |team, stats|
+    if stats[:team_name] === team_name
+      stats[:players].each do |player|
+        nums << player[:number]
+      end
+    end
+  end
+  nums.sort
+end
+
+
+def player_stats(player_name)
+  game_hash.each_pair do |team, stats|
+    stats[:players].each do |player|
+      if player[:player_name] === player_name
+        return player
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  nums = []
+  game_hash.each_pair do |team, stats|
+    stats[:players].each do |player|
+      nums << player[:shoe]
+    end
+  end
+  nums.sort
+  game_hash.each_pair do |team, stats|
+    stats[:players].each do |player|
+      if player[:shoe] === nums.sort[-1]
+        return player[:rebounds]
+      end
+    end
+  end
+end
