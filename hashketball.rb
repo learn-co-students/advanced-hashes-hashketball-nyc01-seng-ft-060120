@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require "pry"
 def game_hash
   {
     home: {
@@ -126,4 +127,78 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored (playa_name)
+  game_hash.each do |k_team_provenance, v_team_main_hash|
+    v_team_main_hash[:players].each do |v_player_hash|
+      if v_player_hash[:player_name] == playa_name
+        return v_player_hash[:points]
+      end
+    end
+
+  end
+end
+
+def shoe_size (playa_name)
+  game_hash.each do |k_team_provenance, v_team_main_hash|
+    v_team_main_hash[:players].each do |v_player_hash|
+      if v_player_hash[:player_name] == playa_name
+        return v_player_hash[:shoe]
+      end
+    end
+
+  end
+end
+
+def team_colors (name)
+  game_hash.each do |k_team_provenance, v_team_main_hash|
+    if v_team_main_hash[:team_name] == name
+      return v_team_main_hash[:colors]
+    end
+
+  end
+end
+
+def team_names
+  [game_hash[:home][:team_name],game_hash[:away][:team_name]]
+end
+
+
+def player_numbers (team_name)
+  playa_numba_array = []
+  game_hash.each do |k_team_provenance, v_team_main_hash|
+    if v_team_main_hash[:team_name] == team_name
+      v_team_main_hash[:players].each do |v_player_hash|
+        playa_numba_array << v_player_hash[:number]
+      end
+    end
+
+
+  end
+  return playa_numba_array
+end
+
+def player_stats (playa_name)
+  playa_stats_yo = {}
+  game_hash.each do |k_team_provenance, v_team_main_hash|
+    v_team_main_hash[:players].each do |v_player_hash|
+      if v_player_hash[:player_name] == playa_name
+        return v_player_hash
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  largest_dang_shoe = 0
+  rebounds = []
+  game_hash.each do |k_team_provenance, v_team_main_hash|
+    v_team_main_hash[:players].each do |v_player_hash|
+      if v_player_hash[:shoe] > largest_dang_shoe
+        largest_dang_shoe = v_player_hash[:shoe]
+        rebounds = v_player_hash[:rebounds]
+      end
+    end
+
+  end
+  rebounds
+end
